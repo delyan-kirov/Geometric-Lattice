@@ -1,0 +1,4 @@
+#!/bin/bash
+conjure solve -ac --number-of-solutions=all geo_sym_test.essence n_test.param
+find -iname '*.solution' -type f -print0  | xargs --null -n 100 rm -vrf | wc -l
+
