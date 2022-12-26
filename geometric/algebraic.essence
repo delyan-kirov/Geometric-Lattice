@@ -1,0 +1,27 @@
+language ESSENCE 2.4.0
+
+given n : int
+
+letting S be domain int(0..n-1)
+
+find R : function (total) (S,S) --> S
+find o: S
+find e: S
+
+such that
+
+$Associative
+forAll i,j,k: S. R((i,R((j,k)))) = R((R((i,j)),k)),
+
+$Commutative
+forAll i,j: S. R((i,j)) = R((j,i)),
+
+$idempotent
+forAll i: S. R((i,i)) = i,
+
+$Bounded
+forAll i : S. R((o,i)) = i,
+forAll i : S. R((e,i)) = e,
+
+$Symmetry breaking
+forAll i,j : S. ((R((i,j)) = i) /\ (i >= j)) \/ !(R((i,j)) = i)
