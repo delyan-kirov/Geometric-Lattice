@@ -1,8 +1,0 @@
-letting T be domain int(1..4)
-find K : set of set of int(1..4)
-find R : function (surjective) (T,T) --> int(0..1)
-
-such that 
-	forAll i,j:T. R((i,j)) = R((j,i)),
-	forAll i:T. R((i,i)) = 0,
-	forAll i,j:K R((i,j)) = 1
