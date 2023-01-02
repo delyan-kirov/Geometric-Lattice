@@ -1,0 +1,8 @@
+letting n be domain int(1..10)
+letting k be domain int(1..5)
+find echelon : function (surjective) n --> k
+such that echelon(1) = 1
+such that echelon(10) = 5
+such that
+   forAll i : int(2..9) .
+     (echelon(i) <= i) /\ (echelon(i) >= echelon(i-1)) /\ (echelon(i)<10) /\ (echelon(i)>1)

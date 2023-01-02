@@ -1,0 +1,11 @@
+letting S be domain int(1..4)
+letting P be function (1 --> 1, 2 --> 2, 3 --> 2, 4 --> 3)
+find R : function (total) (S,S) --> int(0..1)
+such that
+
+forAll i,j : S. R((i,j)) = R((j,i)),
+forAll i : S. R((i,i)) = 0,
+exists i,j : S. R((i,j)) = 1,
+forAll i : S.  ((P(i) = 2) /\ (R((i,1)) = 1)) \/ !(P(i) = 2),
+forAll i : S. ((P(i) > 2) /\ (exists j:S. (P(j) < P(i)) /\ (R((i,j)) = 1))) \/ (P(i) < 3),
+forAll i : S.  ((P(i) = 2) /\ (R((i,4)) = 1)) \/ !(P(i) = 2)
