@@ -2,7 +2,20 @@
 
 echo "adding parameter n" 
 
-echo "letting n be 6" > n_test.txt
+read -p 'Number of points (2 to 12 recommended)' param
+echo
+echo The parameter of choice was set to $param
+if test $param -gt 12
+then
+        echo "Too big, exit script!"
+        exit 0
+fi
+if [[ $((param)) != $param ]]; then
+    echo "Incorrect input, exit script!"
+    exit 0
+fi
+
+echo "letting n be $param" > n_test.txt
 mv -v "n_test.txt" "n_test".param
 
 echo "solving lattice"
@@ -12,7 +25,7 @@ conjure solve -ac --number-of-solutions=all geo_sym_test.essence n_test.param
 find -iname '*.param' -type f -print0  | xargs --null -n 100 rm -vrf | wc -l
 
 for file in *.solution; do
-   echo "letting n be 6" >> $file
+   echo "letting n be $param" >> $file
 done
 
 echo "changing file type"
