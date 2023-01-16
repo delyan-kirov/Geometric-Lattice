@@ -5,6 +5,8 @@ letting N be domain int(0..n-1)
 
 find M : function (total) (N,N) --> N
 find J : function (total) (N,N) --> N
+find R : function (total) N --> N
+find C : function (total) (N,N) --> int(0..1)
 
 such that
 
@@ -24,16 +26,27 @@ $Bounded
 forAll i : N. M((n-1,i)) = i,
 forAll i : N. J((0,i)) = i,
 
-$Ranked
-forAll i,j : N. ((J((i,j)) = i)/\(i >= j)) \/ !(J((i,j)) = i),
+$Cover relation
+forAll i,j : N. (!((J((i,j)) = i) \/ (J((i,j)) = j)) /\ (C((i,j)) = 0)) \/
+(M((i,j)) = i) /\ (exists k : N. !(k = i) /\ !(k = j) /\ (M((j,k)) = k) /\ (C((i,j)) = 0)) \/
+(M((i,j)) = j) /\ (exists k : N. !(k = i) /\ !(k = j) /\ (M((i,k)) = k) /\ (C((i,j)) = 0)) \/
+(C((i,j)) = 1),
 
-$Semi-modular, Maclane condition 1
-forAll i,j,k: N. ((J((j,k)) < i) /\ (i < k) /\ (k < M((i,j))) /\
-                 (exists d: N. (
-                                (J((j,k)) < d) /\ (d <= j) /\
-                                (i = J((M((i,d)),k)))) 
-                                )
-                 ) \/ !((J((j,k)) < i) /\ (i < k) /\ (k < M((i,j)))),
+$Ranked by echelon
+forAll i,j : N. ((J((i,j)) = i) /\ (i >= j)) \/ 
+                ((J((i,j)) = j) /\ (j >= i)) \/ 
+                (M((i,j)) = 0) \/
+                                 (forAll k,l : N. (
+                                                   ((J((i,k)) = i) /\ (J((j,l)) = j) /\ (i > j) /\ (k >= l)) \/
+                                                   ((J((i,k)) = i) /\ (J((j,l)) = j) /\ (i > j) /\ (k <= l)) \/
+                                                   !((J((i,k)) = i) /\ (J((j,l)) = j))
+                                                   )),
+                                                                                           
+$Graded
+forAll i,j : N. (((J((i,j)) = i) /\ (R(i) > R(j))) \/ !(J((i,j)) = i)) /\ (((C((i,j)) = 1) /\ (R(i) = R(j) + 1)) \/ !(C((i,j)) = 1)),
+
+Semi-modular
+forAll i,j : N. ((C((M((i,j)),i)) = 1) /\ (C((J((i,j)),j)) = 1)) \/ !(C((M((i,j)),i)) = 1),
 
 $Atomistic
 forAll i: N. (i = 0) \/
