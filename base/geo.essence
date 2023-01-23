@@ -26,29 +26,18 @@ $Bounded
 forAll i : N. M((n-1,i)) = i,
 forAll i : N. J((0,i)) = i,
 
+$Symmetry breaking 
+forAll i,j : N. (R(i) > R(j)) -> (i > j),
+
 $Cover relation
-forAll i,j : N. (!((J((i,j)) = i) \/ (J((i,j)) = j)) /\ (C((i,j)) = 0)) \/
-(M((i,j)) = i) /\ (exists k : N. !(k = i) /\ !(k = j) /\ (M((j,k)) = k) /\ (C((i,j)) = 0)) \/
-(M((i,j)) = j) /\ (exists k : N. !(k = i) /\ !(k = j) /\ (M((i,k)) = k) /\ (C((i,j)) = 0)) \/
-(C((i,j)) = 1),
+forAll i,j:N. (C((i,j)) = 1) <-> ((J((i,j)) = i) /\ !(i = j) /\ !(exists k : N. !(i = k) /\ !(j = k) /\ (J((i, k)) = i) /\ (J((k,j)) = k))),
 
-$Ranked by echelon
-forAll i,j : N. ((J((i,j)) = i) /\ (i >= j)) \/ 
-                ((J((i,j)) = j) /\ (j >= i)) \/ 
-                (M((i,j)) = 0) \/
-                                 (forAll k,l : N. (
-                                                   ((J((i,k)) = i) /\ (J((j,l)) = j) /\ (i > j) /\ (k >= l)) \/
-                                                   ((J((i,k)) = i) /\ (J((j,l)) = j) /\ (i > j) /\ (k <= l)) \/
-                                                   !((J((i,k)) = i) /\ (J((j,l)) = j))
-                                                   )),
-                                                                                           
 $Graded
-forAll i,j : N. (((J((i,j)) = i) /\ (R(i) > R(j))) \/ !(J((i,j)) = i)) /\ (((C((i,j)) = 1) /\ (R(i) = R(j) + 1)) \/ !(C((i,j)) = 1)),
+forAll i,j : N. ((J((i,j)) = i) /\ !(i = j)) -> (R(i) > R(j)),
+forAll i,j : N. (C((i,j)) = 1) -> (R(i) = R(j) + 1),
 
-Semi-modular
-forAll i,j : N. ((C((M((i,j)),i)) = 1) /\ (C((J((i,j)),j)) = 1)) \/ !(C((M((i,j)),i)) = 1),
+$Semi-modular
+forAll i,j : N. R(i) + R(j) >= R(M((i,j))) + R(J((i,j))),
 
 $Atomistic
-forAll i: N. (i = 0) \/
-             !(exists j:N. (M((i,j)) = j) /\ !(i = j) /\ !(j = 0)) \/ 
-             (exists j,k: N. (J((j,k)) = i) /\ !(j = i) /\ !(k = i))
+forAll i: N. (R(i) = 1) \/ (R(i) = 0) \/ (exists j,k : N. !(i = k) /\ !(i = j) /\ (J((j,k)) = i))
