@@ -1,0 +1,4 @@
+#!/bin/bash
+conjure solve -ac --number-of-solutions=all base_model.essence n_test.param
+find -iname '*.solution' -type f -print0  | xargs --null -n 100000000000 rm -vrf | wc -l
+
