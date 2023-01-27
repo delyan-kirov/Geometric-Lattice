@@ -25,12 +25,13 @@ echo "solving lattice"
 conjure solve -ac --number-of-solutions=all geo_sym.essence n_test.param
 
 echo "running nauty"
-python3 make_graph_test.py
+python3 nauty.py
 
 echo "running python"
-
 python3 graph.py
 
 echo "deleting solutions"
 find -iname '*.solution' -type f -print0  | xargs --null -n 100 rm -vrf | wc -l
 find -iname '*.param' -type f -print0  | xargs --null -n 100 rm -vrf | wc -l
+find -iname '*.txt' -type f -print0  | xargs --null -n 100 rm -vrf | wc -l
+find -iname '*.cover' -type f -print0  | xargs --null -n 100 rm -vrf | wc -l
