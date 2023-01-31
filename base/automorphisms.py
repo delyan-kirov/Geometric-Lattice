@@ -100,6 +100,22 @@ def delete_iso (iso_class, path):
         if (files not in solutions) and files.endswith(".solution"):
             os.remove(files)
 
+# %%
+def automorphims(data):
+    count = 1
+    for graph in data:
+        with open(graph, 'r') as file:
+            graph_image = make_graph(file.read())
+            file.close
+        graph_image.set_vertex_coloring([set([0])])
+        group = str(autgrp(graph_image))
+        head, sep, tail = group.partition(']], ')
+        group = tail
+        head, sep, tail = group.partition('.')
+        group = head
+        print("Group" +str(count) + " size is " + group)
+        count = count + 1
+        
 
 # %%
 # Main
@@ -114,6 +130,7 @@ for files in os.listdir(path):
         create_graph_data(files, count)
 graph_data = find_file_type(".", ".txt")
 iso_class = remove_iso(graph_data)
+automorphims(iso_class)
 delete_iso(iso_class, ".")
 
 
