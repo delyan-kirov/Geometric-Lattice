@@ -27,7 +27,6 @@ def make_graph(graph_data):
 # %%
 def draw(files, count):
     with open(files, "r") as file:
-        print("opening solution from solver")
         cover = file.read()
         graph_data = ""
 
@@ -40,7 +39,6 @@ def draw(files, count):
         graph = make_graph(graph_data)
         nx.draw(graph, pos=nx.circular_layout(graph), with_labels=True)
         name = "graph_" + str(count) + ".png"
-        print(name)
         plt.savefig(name, dpi=300, bbox_inches="tight")
         plt.close("all")
         file.close()

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+start_time=$(date +%s.%3N)
 echo "adding parameter n" 
 
 read -p 'Number of points (2 to 12 recommended)' param
@@ -15,17 +15,27 @@ if [[ $((param)) != $param ]]; then
     exit 0
 fi
 
-echo "letting n be $param" > n_test.txt
-mv -v "n_test.txt" "n_test".param
+echo "letting n be $param" > n.txt
+mv -v "n.txt" "n".param
 
 python3 add_sym_constraints.py
 
 echo "solving lattice"
 
-conjure solve -ac --number-of-solutions=all geo_sym.essence n_test.param
+conjure solve -ac --number-of-solutions=all geo_sym.essence n.param
+
+end_time=$(date +%s.%3N)
+elapsed=$(echo "scale=3; $end_time - $start_time" | bc)
+echo "It took " $elapsed " to solve the model" 
+
+restart_time=$(date +%s.%3N)
 
 echo "running nauty"
 python3 nauty.py
+
+new_time=$(date +%s.%3N)
+reelapsed=$(echo "scale=3; $new_time - $restart_time" | bc)
+echo "It took "$reelapsed " remove isomorphic images."
 
 echo "running python"
 python3 graph.py
@@ -35,3 +45,4 @@ find -iname '*.solution' -type f -print0  | xargs --null -n 100 rm -vrf | wc -l
 find -iname '*.param' -type f -print0  | xargs --null -n 100 rm -vrf | wc -l
 find -iname '*.txt' -type f -print0  | xargs --null -n 100 rm -vrf | wc -l
 find -iname '*.cover' -type f -print0  | xargs --null -n 100 rm -vrf | wc -l
+rm geo_sym.essence

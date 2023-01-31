@@ -20,7 +20,6 @@ def make_graph(graph_data):
 # %%
 def create_graph_data(files, count):
     with open(files, "r") as file:
-        print("opening solution from solver")
         cover = file.read()
         graph_data = ""
 
@@ -33,7 +32,6 @@ def create_graph_data(files, count):
         head, sep, tail = file.name.partition('.')
         with open (head + '.txt', 'w') as f:
             f.write(graph_data)
-            print(head)
         f.close
         file.close()
     pass
@@ -58,7 +56,6 @@ def rename_cover(path):
         if files.endswith('.cover'):
             head, sep, tail = files.partition('.')
             os.rename(files, head + '.solution')
-            print(files)
 
 # %%
 def find_file_type(path, extension):
@@ -69,8 +66,6 @@ def find_file_type(path, extension):
                 data.append(files)
                 file.close
     return data
-
-#find_file_type(".", ".txt")
 
 # %%
 def remove_iso (graph_data):
@@ -89,16 +84,13 @@ def remove_iso (graph_data):
             if isomorphic(graph_i, graph_rep):
                 graph_data.remove(data)
     print("Found isomorphic classes" + " , There are " + str(len(iso_class)))
-    print(iso_class)
     return iso_class
                 
-graph_data = find_file_type(".", ".txt")
-print(type(graph_data))
-remove_iso(graph_data)
 
 # %%
 def delete_iso (iso_class, path):
     # Find .solution files corresponding with .txt files
+    print("Deleting isomorphic lattices")
     solutions = []
     for data in iso_class:
         head, sep, tail = data.partition('.')
@@ -106,8 +98,6 @@ def delete_iso (iso_class, path):
         solutions.append(solution)
     for files in os.listdir(path):
         if (files not in solutions) and files.endswith(".solution"):
-            print("To be deleted: ")
-            print(files)
             os.remove(files)
 
 

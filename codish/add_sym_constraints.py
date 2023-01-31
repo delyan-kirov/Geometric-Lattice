@@ -16,7 +16,7 @@ def make_content (n):
 
 # %%
 def get_n():
-    with open ("n_test.param", 'r') as f:
+    with open ("n.param", 'r') as f:
          data = f.read()
          n = data.split("letting n be ",1)[1]
     return int(n)
