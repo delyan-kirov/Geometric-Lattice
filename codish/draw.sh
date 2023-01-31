@@ -26,7 +26,7 @@ conjure solve -ac --number-of-solutions=all geo_sym.essence n.param
 
 end_time=$(date +%s.%3N)
 elapsed=$(echo "scale=3; $end_time - $start_time" | bc)
-echo "It took " $elapsed " to solve the model" 
+echo "It took " $elapsed "to solve the model" 
 
 restart_time=$(date +%s.%3N)
 
@@ -35,7 +35,7 @@ python3 nauty.py
 
 new_time=$(date +%s.%3N)
 reelapsed=$(echo "scale=3; $new_time - $restart_time" | bc)
-echo "It took "$reelapsed " remove isomorphic images."
+echo "It took "$reelapsed "to remove isomorphic images."
 
 echo "running python"
 python3 graph.py
