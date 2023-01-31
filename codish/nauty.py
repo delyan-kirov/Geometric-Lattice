@@ -9,7 +9,7 @@ from pynauty import *
 # %%
 def make_graph(graph_data):
     n = int(math.sqrt(len(graph_data)))
-    g = Graph(len(graph_data))
+    g = Graph(n)
     for i in range(len(graph_data)):
         if graph_data[i] == "1":
             right = i % n
