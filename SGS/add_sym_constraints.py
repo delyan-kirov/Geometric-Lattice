@@ -1,6 +1,6 @@
 # %%
 from sympy.combinatorics import Permutation, PermutationGroup
-from sympy.combinatorics.named_groups import SymmetricGroup, DihedralGroup, CyclicGroup
+from sympy.combinatorics.named_groups import SymmetricGroup
 from array import *
 import os
 import re
@@ -81,19 +81,14 @@ def generating_set(G, n):
         permutations[i] = permutations[i] + ")"
         
     data = []
-    func = []
+    normal_form = []
     
     for i in range(0, len(permutations)-1):
         data = find_values(permutations[i])
-        func_i = bijection(data, n)
-        func.append(func_i)
+        normal_form.append(bijection(data, n))
     
-    # for i in range (0, len(func)):
-    #     print (func[i])
-    
-    return func
+    return normal_form
         
-# print(generating_set(SymmetricGroup(30), 30))
 
 # %%
 def get_n():
@@ -114,7 +109,6 @@ def sat_model(permutations, n):
     string = string + ") " + "\n"
     return string
 permutations = generating_set(SymmetricGroup(30), 30)
-sat_model(permutations, 30)
 
 # %%
 #Main
