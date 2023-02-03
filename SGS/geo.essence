@@ -49,4 +49,4 @@ $Atomistic
 forAll i: N. (R(i) = 1) \/ (R(i) = 0) \/ (exists j,k : N. !(i = k) /\ !(i = j) /\ (J((j,k)) = i)),
 
 $Stabilizer chain constraint
-forAll i:N. exists p: int(0..sizeS). (SGS((p,i)) = i+1) /\ (forAll j:N. SGS((p,j)) = j)
+forAll i:int(0..n-2). exists p: int(0..sizeS). (SGS((p,i)) = i+1) /\ (forAll j:int(0..i-1). SGS((p,j)) = j)
