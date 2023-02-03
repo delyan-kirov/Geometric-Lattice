@@ -95,6 +95,7 @@ def get_n():
     with open ("n.param", 'r') as f:
          data = f.read()
          n = data.split("letting n be ",1)[1]
+         f.close()
     return int(n)
 
 # %%
@@ -108,7 +109,6 @@ def sat_model(permutations, n):
             value = ""
     string = string + ") " + "\n"
     return string
-permutations = generating_set(SymmetricGroup(30), 30)
 
 # %%
 #Main
