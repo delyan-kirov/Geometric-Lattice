@@ -70,7 +70,7 @@ def bijection(data, n):
 
 # %%
 def generating_set(G, n):
-    data = str((G.schreier_sims_incremental())[1])
+    data = str((G.schreier_sims_incremental(base = list(range(0,n))))[1])
     permutations = []
     i = 0
     while (data != ""):
