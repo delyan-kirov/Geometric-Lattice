@@ -19,8 +19,11 @@ echo "letting n be $param" > n.txt
 mv -v "n.txt" "n".param
 
 python3 gap_constraints.py
-gap stabchain.gap
-pkill gap
+
+gap -b -q << EOI
+Read("stabchain.gap");
+quit;
+EOI
 python3 gap.py
 
 echo "solving lattice"
