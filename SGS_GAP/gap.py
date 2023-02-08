@@ -5,36 +5,6 @@ import re
 from pathlib import Path
 
 
-# %%
-def clear (data):
-    permutations = []
-    while data != "":
-        head, sep, tail = data.partition("(")
-        perm_i = tail
-        head, sep, tail = perm_i.partition(")")
-        perm_i = head
-        permutations.append(str(perm_i))
-        head, sep, tail = data.partition("), ")
-        data = tail
-    return permutations
-
-# %%
-def make (permutations, n):
-    bijections = []
-    identity = list(range(1, n+1))
-    for i in range(0, len(permutations)):
-        proj_l, sep, proj_r = permutations[i].partition(",")
-        bijection = list(range(1, n+1))
-        for j in range (1, n):
-            if identity[j] == int(proj_r):
-                bijection[j] = int(proj_l)
-            if identity[j] == int(proj_l):
-                bijection[j] = int(proj_r)
-        bijections.append(bijection)
-
-    for i in range(0, len(permutations)):
-            bijections[i] = [x - 1 for x in bijections[i]]
-    return(bijections)
 
 # %%
 def get_n():
@@ -52,6 +22,64 @@ def get_gap_file():
     return data
 
 # %%
+def refine(permutation):
+    subcycles = []
+
+    while permutation != "":
+        head,sep,tail = permutation.partition(")")
+        subcycles.append(head + ")")
+        permutation = tail
+
+    return(subcycles)
+
+#%%
+def clear (cycle):
+    result = []
+    head,sep,tail = cycle.partition("(")
+    head,sep,tail = tail.partition(")")
+    cycle = head
+    
+    while cycle != "":
+        head,sep,tail = cycle.partition(",")
+        result.append(int(head))
+        cycle = tail
+    return result
+
+#%%
+def bij(cycle, n, bijection):
+    identity = list(range(1,n+1))
+    
+    for i in range(0,len(identity)):
+        for j in range(0, len(cycle)):
+            if identity[i] == cycle[j]:
+                if j == len(cycle) - 1:
+                    bijection[i] = cycle[0]
+                    break
+                bijection[i] = cycle[j+1]
+                break
+    return(bijection)
+
+#%%
+def extract(data):
+    head, sep, tail = data.partition("[ ")
+    data = tail
+    head,sep,tail = data.partition(" ]")
+    data = head
+
+    data = data.replace(" ", "")
+    data = data.replace("\n", "")
+    data = data + ","
+   
+    cycles = []
+
+    while data != "":
+        head, sep, tail = data.partition("(")
+        head, sep, tail = tail.partition("),")
+        cycles.append("(" + head + ")")
+        data = tail
+    return(cycles)
+
+#%%
 def sat_model(permutations, n):
     string = "letting SGS be function("
     value = ""
@@ -63,13 +91,41 @@ def sat_model(permutations, n):
     string = string + ") " + "\n"
     return string
 
+#%%
+def make():
+    n = get_n()
+    data = get_gap_file()
+    bijections = []
+    data = extract(data)
+    
+    for i in range(0, len(data)):
+        bijections.append(refine(data[i]))
+    
+    for i in range(0, len(bijections)):
+        for j in range(0, len(bijections[i])):
+            bijections[i][j] = clear(bijections[i][j])
+
+    identity = list(range(1,n+1))
+    permutations = []
+
+    for i in range(0, len(bijections)):
+        for j in range(0, len(bijections[i])):
+            if j == 0:
+                bijection = bij(bijections[i][j], n, identity)
+            bijection = bij(bijections[i][j], n, bijection)
+        permutations.append(bijection[:])
+  
+    for i in range(0,len(permutations)):
+        for j in range(0,len(permutations[i])):
+            permutations[i][j] = permutations[i][j] - 1
+    
+
+    constraints = sat_model(permutations, n) + "letting sizeS be " + str(len(permutations)-1)
+    with open("n.param", 'a') as file:
+      file.write(constraints)
+
+
 # %%
 #Main
-path = Path(".")
-n = get_n()
-data = get_gap_file()
-permutations = clear(data)
-bijections = make(permutations, n)
-constraints = sat_model(bijections, n) + "letting sizeS be " + str(len(permutations)-1)
-with open("n.param", 'a') as file:
-    file.write(constraints)
+print("generating constaints")
+make()
