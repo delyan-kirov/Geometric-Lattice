@@ -1,0 +1,75 @@
+language ESSENCE 2.4.0
+
+given n : int
+letting N be domain int(0..n-1)
+
+find M : function (total) (N,N) --> N
+find J : function (total) (N,N) --> N
+find R : function (total) N --> N
+find C : function (total) (N,N) --> int(0..1)
+
+such that
+
+$Associative
+forAll i,j,k: N. M((i,M((j,k)))) = M((M((i,j)),k)),
+forAll i,j,k: N. J((i,J((j,k)))) = J((J((i,j)),k)),
+
+$Commutative
+forAll i,j: N. M((i,j)) = M((j,i)),
+forAll i,j: N. J((i,j)) = J((j,i)),
+
+$Absorption
+forAll i,j: N. M((i,J((i,j)))) = i,
+forAll i,j: N. J((i,M((i,j)))) = i,
+
+$Idempotent
+forAll i: N. M((i,i)) = i,
+forAll i: N. J((i,i)) = i,
+
+$Bounded
+forAll i : N. M((n-1,i)) = i,
+forAll i : N. J((0,i)) = i,
+
+$Symmetry breaking 
+forAll i,j : N. (R(i) > R(j)) -> (i > j),
+
+$Cover relation
+forAll i,j:N. (C((i,j)) = 1) <-> ((J((i,j)) = i) /\ !(i = j) /\ !(exists k : N. !(i = k) /\ !(j = k) /\ (J((i, k)) = i) /\ (J((k,j)) = k))),
+
+$Graded
+forAll i,j: N. ((J((i,j)) = i) /\ !(i = j)) -> (R(i) > R(j)),
+forAll i,j: N. (C((i,j)) = 1) -> (R(i) = R(j) + 1),
+
+$Semi-modular
+forAll i,j: N. R(i) + R(j) >= R(M((i,j))) + R(J((i,j))),
+
+$Atomistic
+forAll i: N. (R(i) = 1) \/ (R(i) = 0) \/ (exists j,k : N. !(i = k) /\ !(i = j) /\ (J((j,k)) = i)),
+
+( exists k: N. (forAll l: int(0..k-1). (M((l,1))) = M((l,2))) /\ (M((k,1)) > M((k,2))) ) \/ !(R(1) = R(2)),
+( exists k: N. (forAll l: int(0..k-1). (M((l,2))) = M((l,3))) /\ (M((k,2)) > M((k,3))) ) \/ !(R(2) = R(3)),
+( exists k: N. (forAll l: int(0..k-1). (M((l,3))) = M((l,4))) /\ (M((k,3)) > M((k,4))) ) \/ !(R(3) = R(4)),
+( exists k: N. (forAll l: int(0..k-1). (M((l,4))) = M((l,5))) /\ (M((k,4)) > M((k,5))) ) \/ !(R(4) = R(5)),
+( exists k: N. (forAll l: int(0..k-1). (M((l,5))) = M((l,6))) /\ (M((k,5)) > M((k,6))) ) \/ !(R(5) = R(6)),
+( exists k: N. (forAll l: int(0..k-1). (M((l,6))) = M((l,7))) /\ (M((k,6)) > M((k,7))) ) \/ !(R(6) = R(7)),
+( exists k: N. (forAll l: int(0..k-1). (M((l,7))) = M((l,8))) /\ (M((k,7)) > M((k,8))) ) \/ !(R(7) = R(8)),
+( exists k: N. (forAll l: int(0..k-1). (M((l,8))) = M((l,9))) /\ (M((k,8)) > M((k,9))) ) \/ !(R(8) = R(9)),
+( exists k: N. (forAll l: int(0..k-1). (M((l,9))) = M((l,10))) /\ (M((k,9)) > M((k,10))) ) \/ !(R(9) = R(10)),
+( exists k: N. (forAll l: int(0..k-1). (M((l,10))) = M((l,11))) /\ (M((k,10)) > M((k,11))) ) \/ !(R(10) = R(11)),
+( exists k: N. (forAll l: int(0..k-1). (M((l,11))) = M((l,12))) /\ (M((k,11)) > M((k,12))) ) \/ !(R(11) = R(12)),
+( exists k: N. (forAll l: int(0..k-1). (M((l,12))) = M((l,13))) /\ (M((k,12)) > M((k,13))) ) \/ !(R(12) = R(13)),
+( exists k: N. (forAll l: int(0..k-1). (M((l,13))) = M((l,14))) /\ (M((k,13)) > M((k,14))) ) \/ !(R(13) = R(14)),
+( exists k: N. (forAll l: int(0..k-1). (M((l,14))) = M((l,15))) /\ (M((k,14)) > M((k,15))) ) \/ !(R(14) = R(15)),
+( exists k: N. (forAll l: int(0..k-1). (M((l,15))) = M((l,16))) /\ (M((k,15)) > M((k,16))) ) \/ !(R(15) = R(16)),
+( exists k: N. (forAll l: int(0..k-1). (M((l,16))) = M((l,17))) /\ (M((k,16)) > M((k,17))) ) \/ !(R(16) = R(17)),
+( exists k: N. (forAll l: int(0..k-1). (M((l,17))) = M((l,18))) /\ (M((k,17)) > M((k,18))) ) \/ !(R(17) = R(18)),
+( exists k: N. (forAll l: int(0..k-1). (M((l,18))) = M((l,19))) /\ (M((k,18)) > M((k,19))) ) \/ !(R(18) = R(19)),
+( exists k: N. (forAll l: int(0..k-1). (M((l,19))) = M((l,20))) /\ (M((k,19)) > M((k,20))) ) \/ !(R(19) = R(20)),
+( exists k: N. (forAll l: int(0..k-1). (M((l,20))) = M((l,21))) /\ (M((k,20)) > M((k,21))) ) \/ !(R(20) = R(21)),
+( exists k: N. (forAll l: int(0..k-1). (M((l,21))) = M((l,22))) /\ (M((k,21)) > M((k,22))) ) \/ !(R(21) = R(22)),
+( exists k: N. (forAll l: int(0..k-1). (M((l,22))) = M((l,23))) /\ (M((k,22)) > M((k,23))) ) \/ !(R(22) = R(23)),
+( exists k: N. (forAll l: int(0..k-1). (M((l,23))) = M((l,24))) /\ (M((k,23)) > M((k,24))) ) \/ !(R(23) = R(24)),
+( exists k: N. (forAll l: int(0..k-1). (M((l,24))) = M((l,25))) /\ (M((k,24)) > M((k,25))) ) \/ !(R(24) = R(25)),
+( exists k: N. (forAll l: int(0..k-1). (M((l,25))) = M((l,26))) /\ (M((k,25)) > M((k,26))) ) \/ !(R(25) = R(26)),
+( exists k: N. (forAll l: int(0..k-1). (M((l,26))) = M((l,27))) /\ (M((k,26)) > M((k,27))) ) \/ !(R(26) = R(27)),
+( exists k: N. (forAll l: int(0..k-1). (M((l,27))) = M((l,28))) /\ (M((k,27)) > M((k,28))) ) \/ !(R(27) = R(28)),

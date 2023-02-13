@@ -1,11 +1,7 @@
 # %%
 from array import *
-import os
-import re
 from pathlib import Path
-
-
-
+import random
 # %%
 def get_n():
     with open ("n.param", 'r') as f:
@@ -14,9 +10,22 @@ def get_n():
          f.close()
     return int(n)
 
+#%%
+def rand_perm(n):
+    perm = []
+    while 0<1:
+        number = random.randint(1,n)
+        if number not in perm:
+            perm.append(number)
+        if len(perm) == n:
+            break
+    print(perm)
+    return perm
+
+#%%
 def make_gap_file(path,n):
     data = "PrintTo(\"new.g\",StrongGeneratorsStabChain(StabChain(SymmetricGroup("
-    base = str(list(range(1, n+1)))
+    base = str(rand_perm(n))
     # PrintTo("new.g",StrongGeneratorsStabChain(StabChain(SymmetricGroup(12),[0,1,2,3,4])));
     data = data + str(n) + ")," + base + ")));"
     with open("stabchain.gap", 'w') as file:
