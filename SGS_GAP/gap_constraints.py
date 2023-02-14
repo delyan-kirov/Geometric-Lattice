@@ -14,7 +14,7 @@ def get_n():
 def rand_perm(n):
     perm = []
     while 0<1:
-        number = random.randint(1,n)
+        number = random.randint(0,n-1)
         if number not in perm:
             perm.append(number)
         if len(perm) == n:
