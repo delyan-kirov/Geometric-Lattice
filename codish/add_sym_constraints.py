@@ -6,11 +6,10 @@ from pathlib import Path
 # %%
 def make_content (n):
     content = '\n'
-    # (exists k: N. (forAll l: int(0..k-1). (M((l,i)) = M((l,j))) ) /\ (M((k,i)) > M((k,j))) ) \/ !(R(i) = R(i+1))
     for i in range(1, n-2):
-         content = content + "( exists k: N. (forAll l: int(0..k-1). (M((l," + str(i) + ")" + \
-         ")) = M((l," + str(i+1) + "))) /\ (M((k," + str(i) + ")) > M((k," + str(i+1) + "))) )" + \
-         " \/ !(R(" + str(i) + ")" " = R(" + str(i+1) + "))," + '\n'
+        #[M((i,1)) | i:N] >=lex [M((i,2)) | i:N],
+         content = content + "[M((i," + str(i) + ")) | i:N] " + ">=lex" + " [M((i," + str(i+1) + ")) | i:N] \/ " + \
+                             "(R(" + str(i) + ") !=" + "R(" + str(i+1) + "))," + "\n"
     print("adding symmetry constraints")
     return content
 

@@ -45,3 +45,13 @@ forAll i,j: N. R(i) + R(j) >= R(M((i,j))) + R(J((i,j))),
 
 $Atomistic
 forAll i: N. (R(i) = 1) \/ (R(i) = 0) \/ (exists j,k : N. !(i = k) /\ !(i = j) /\ (J((j,k)) = i)),
+
+$Lexicographic constraints
+
+
+
+
+
+
+
+
