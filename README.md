@@ -1,8 +1,2 @@
 # Graph_Lattice
-Rust code for generating the graph of a lattice and a SAT solution for generating geometric lattices as well as other SAT models.
-Contains a draw.sh bash script that generates a picture of the geometric lattice. There is also a script to delete all pictures (.png files within the folder). 
-
-The geometric SAT model is really slow for inputs bigger than 12. The draw.sh script wont accept larger inputs then 12 but this can be changed. 
-Essence, minion and python required to run the SAT scripts. 
-
-There is also a pdf file with some explanations for the SAT model. 
+SAT models for lattices. The folders SGS, SGS_GAP and Codish contain models for geometric lattices with different approaches for symmetry breaking. There is also an outdated, soon to be redone file explaining the models. New models to be added soon. The branch randoms contains old files for backup. Must have gap, python3 and nauty to run the scripts. 
