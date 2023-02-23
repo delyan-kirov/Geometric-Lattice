@@ -1,24 +1,7 @@
 #!/usr/bin/env bash
 start_time=$(date +%s.%3N)
-echo "adding parameter n" 
 
-read -p 'Number of points (2 to 12 recommended)' param
-echo
-echo The parameter of choice was set to $param
-if test $param -gt 100 
-then
-        echo "Too big, exit script!"
-        exit 0
-fi
-if [[ $((param)) != $param ]]; then
-    echo "Incorrect input, exit script!"
-    exit 0
-fi
-
-echo "letting n be $param" > n.txt
-mv -v "n.txt" "n".param
-
-#python3 add_sym_constraints.py
+python3 lattice.py
 
 echo "solving lattice"
 
