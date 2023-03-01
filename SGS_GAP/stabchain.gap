@@ -1,1 +1,1 @@
-PrintTo("new.g",StrongGeneratorsStabChain(StabChain(SymmetricGroup(8),[7, 1, 0, 5, 3, 2, 4, 6])));
+PrintTo("new.g",StrongGeneratorsStabChain(StabChain(SymmetricGroup(12),[2, 5, 4, 11, 9, 8, 0, 6, 7, 1, 10, 3])));
