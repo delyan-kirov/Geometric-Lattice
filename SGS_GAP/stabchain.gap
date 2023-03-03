@@ -1,1 +1,3 @@
-PrintTo("new.g",StrongGeneratorsStabChain(StabChain(SymmetricGroup(12),[2, 5, 4, 11, 9, 8, 0, 6, 7, 1, 10, 3])));
+moregens := function(G, list) 
+ local gens, i, Gs, orb, o; gens := []; for i in [1..Length(list)] do Gs := Stabilizer(G, list{[1..i-1]}, OnTuples); orb := Orbit(Gs, list[i]); for o in orb do AddSet(gens, RepresentativeAction(Gs, list[i], o)); od; od; return gens; end; 
+PrintTo("new.g",moregens(SymmetricGroup(12),[1..12]));

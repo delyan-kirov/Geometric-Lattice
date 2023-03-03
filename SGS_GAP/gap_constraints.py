@@ -24,10 +24,12 @@ def rand_perm(n):
 
 #%%
 def make_gap_file(path,n):
-    data = "PrintTo(\"new.g\",StrongGeneratorsStabChain(StabChain(SymmetricGroup("
-    base = str(rand_perm(n))
+    data = "moregens := function(G, list) \n local gens, i, Gs, orb, o; gens := []; for i in [1..Length(list)] do Gs := Stabilizer(G, list{[1..i-1]}, OnTuples); orb := Orbit(Gs, list[i]); for o in orb do AddSet(gens, RepresentativeAction(Gs, list[i], o)); od; od; return gens; end; " + "\n"
+    base = "[1.." + str(n) + "]"
+    #moregens(SymmetricGroup(8), [1..8]);
     # PrintTo("new.g",StrongGeneratorsStabChain(StabChain(SymmetricGroup(12),[0,1,2,3,4])));
-    data = data + str(n) + ")," + base + ")));"
+    func = "PrintTo(\"new.g\",moregens(SymmetricGroup(" + str(n) + ")," + base + "));"
+    data = data + func
     with open("stabchain.gap", 'w') as file:
       file.write(data)
 
