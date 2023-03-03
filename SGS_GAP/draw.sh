@@ -3,6 +3,7 @@ start_time=$(date +%s.%3N)
 
 echo "adding parameter n" 
 cat n.param >> output
+python3 codish.py
 python3 gap_constraints.py >> output
 
 gap -b -q << EOI
@@ -13,7 +14,7 @@ python3 gap.py >> output
 
 echo "solving lattice"
 
-conjure solve -ac --number-of-solutions=all geo.essence n.param
+conjure solve -ac --number-of-solutions=all geo_sym.essence n.param
 
 python3 solution_count.py >> output
 

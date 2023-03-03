@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-
-for param in {1..12}
+rm output
+for param in {8..18}
 do
   echo "letting n be $param" > n.txt
   mv -v "n.txt" "n".param
