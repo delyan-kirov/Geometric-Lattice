@@ -5,7 +5,7 @@ python3 lattice.py
 
 echo "solving lattice"
 
-conjure solve -ac --number-of-solutions=all geo.essence n.param
+conjure solve -ac --number-of-solutions=all boolean.essence n.param
 
 end_time=$(date +%s.%3N)
 elapsed=$(echo "scale=3; $end_time - $start_time" | bc)
@@ -14,7 +14,7 @@ echo "It took " $elapsed "to solve the model"
 restart_time=$(date +%s.%3N)
 
 echo "running nauty"
-python3 nauty.py
+#python3 nauty.py
 
 new_time=$(date +%s.%3N)
 reelapsed=$(echo "scale=3; $new_time - $restart_time" | bc)

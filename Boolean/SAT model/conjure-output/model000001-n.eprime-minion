@@ -1,0 +1,65 @@
+MINION 3
+# CSETopLevel_number = 0
+# CSETopLevel_eliminated_expressions = 0
+# CSETopLevel_total_size = 0
+# CSE_active_number = 8
+# CSE_active_eliminated_expressions = 16
+# CSE_active_total_size = 40
+**VARIABLES**
+DISCRETE C_FunctionND_00000_00001 #
+{0..1}
+DISCRETE C_FunctionND_00000_00002 #
+{0..1}
+DISCRETE C_FunctionND_00001_00000 #
+{0..1}
+DISCRETE C_FunctionND_00001_00003 #
+{0..1}
+DISCRETE C_FunctionND_00002_00000 #
+{0..1}
+DISCRETE C_FunctionND_00002_00003 #
+{0..1}
+DISCRETE C_FunctionND_00003_00001 #
+{0..1}
+DISCRETE C_FunctionND_00003_00002 #
+{0..1}
+BOOL aux0 #Active-CSE: 2 occurrences of this expression or equivalent: (C_FunctionND_00002_00000 != 1)
+BOOL aux1 #Active-CSE: 2 occurrences of this expression or equivalent: (1 != C_FunctionND_00000_00002)
+BOOL aux2 #Active-CSE: 2 occurrences of this expression or equivalent: (C_FunctionND_00003_00001 != 1)
+BOOL aux3 #Active-CSE: 2 occurrences of this expression or equivalent: (1 != C_FunctionND_00001_00003)
+BOOL aux4 #Active-CSE: 2 occurrences of this expression or equivalent: (1 != C_FunctionND_00000_00001)
+BOOL aux5 #Active-CSE: 2 occurrences of this expression or equivalent: (1 != C_FunctionND_00001_00000)
+BOOL aux6 #Active-CSE: 2 occurrences of this expression or equivalent: (C_FunctionND_00002_00003 != 1)
+BOOL aux7 #Active-CSE: 2 occurrences of this expression or equivalent: (C_FunctionND_00003_00002 != 1)
+**TUPLELIST**
+lattice_FunctionND 4 4
+0 1 1 0 
+1 0 0 1 
+1 0 0 1 
+0 1 1 0 
+**VARIABLES**
+ALIAS lattice_FunctionND[4,4]=[[0, 1, 1, 0], [1, 0, 0, 1], [1, 0, 0, 1], [0, 1, 1, 0]]
+**SEARCH**
+PRINT[[C_FunctionND_00000_00001],[C_FunctionND_00000_00002],[C_FunctionND_00001_00000],[C_FunctionND_00001_00003],[C_FunctionND_00002_00000],[C_FunctionND_00002_00003],[C_FunctionND_00003_00001],[C_FunctionND_00003_00002]]
+VARORDER STATIC [C_FunctionND_00000_00001, C_FunctionND_00000_00002, C_FunctionND_00001_00000, C_FunctionND_00001_00003, C_FunctionND_00002_00000, C_FunctionND_00002_00003, C_FunctionND_00003_00001, C_FunctionND_00003_00002]
+**CONSTRAINTS**
+reify(diseq(C_FunctionND_00002_00000,1), aux0)
+reify(diseq(1,C_FunctionND_00000_00002), aux1)
+reify(diseq(C_FunctionND_00003_00001,1), aux2)
+reify(diseq(1,C_FunctionND_00001_00003), aux3)
+reify(diseq(1,C_FunctionND_00000_00001), aux4)
+reify(diseq(1,C_FunctionND_00001_00000), aux5)
+reify(diseq(C_FunctionND_00002_00003,1), aux6)
+reify(diseq(C_FunctionND_00003_00002,1), aux7)
+watched-or({w-literal(C_FunctionND_00000_00001,1),w-literal(C_FunctionND_00001_00000,1)})
+watched-or({w-literal(C_FunctionND_00000_00002,1),w-literal(C_FunctionND_00002_00000,1)})
+watched-or({w-literal(C_FunctionND_00003_00001,1),w-literal(C_FunctionND_00001_00003,1)})
+watched-or({w-literal(C_FunctionND_00003_00002,1),w-literal(C_FunctionND_00002_00003,1)})
+ineq(!aux4, aux5, 0)
+ineq(!aux1, aux0, 0)
+ineq(!aux5, aux4, 0)
+ineq(!aux3, aux2, 0)
+ineq(!aux0, aux1, 0)
+ineq(!aux6, aux7, 0)
+ineq(!aux2, aux3, 0)
+ineq(!aux7, aux6, 0)
+**EOF**
