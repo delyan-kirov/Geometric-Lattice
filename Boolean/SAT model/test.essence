@@ -1,9 +1,0 @@
-language ESSENCE 2.4.0
-
-given n : int,
-letting N be domain int(0..n-1),
-given lattice : function (total) (N, N) --> int(0..1)
-find C : function (total) (N,N) --> int(0..1)
-
-such that
-forAll i,j: N. C((i,j)) = lattice((i,j))
