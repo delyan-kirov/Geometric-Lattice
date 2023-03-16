@@ -1,47 +1,45 @@
 #!/usr/bin/env bash
 start_time=$(date +%s.%3N)
+
 echo "adding parameter n" 
+cat n.param >> output
+python3 codish.py
+python3 gap_constraints.py >> output
 
-read -p 'Number of points (2 to 12 recommended)' param
-echo
-echo The parameter of choice was set to $param
-if test $param -gt 100 
-then
-        echo "Too big, exit script!"
-        exit 0
-fi
-if [[ $((param)) != $param ]]; then
-    echo "Incorrect input, exit script!"
-    exit 0
-fi
-
-echo "letting n be $param" > n.txt
-mv -v "n.txt" "n".param
-
-python3 add_sym_constraints.py
+gap -b -q << EOI
+Read("stabchain.gap");
+quit;
+EOI
+python3 gap.py >> output
 
 echo "solving lattice"
 
-conjure solve -ac --number-of-solutions=all geo.essence n.param
+conjure solve -ac --number-of-solutions=all geo_sym.essence n.param
+
+python3 solution_count.py >> output
 
 end_time=$(date +%s.%3N)
 elapsed=$(echo "scale=3; $end_time - $start_time" | bc)
-echo "It took " $elapsed " to solve the model" 
+echo "It took " $elapsed " to solve the model"  >> output
 
 restart_time=$(date +%s.%3N)
 
 echo "running nauty"
-python3 nauty.py
+python3 nauty.py >> output
 
 new_time=$(date +%s.%3N)
 reelapsed=$(echo "scale=3; $new_time - $restart_time" | bc)
-echo "It took "$reelapsed " remove isomorphic images."
+echo "It took "$reelapsed " to remove isomorphic images." >> output
 
 echo "running python"
-python3 graph.py
+python3 graph.py >> output
 
-echo "deleting solutions"
+echo "deleting cached files"
 find -iname '*.solution' -type f -print0  | xargs --null -n 100 rm -vrf | wc -l
 find -iname '*.param' -type f -print0  | xargs --null -n 100 rm -vrf | wc -l
 find -iname '*.txt' -type f -print0  | xargs --null -n 100 rm -vrf | wc -l
+
+echo -e >> output
 find -iname '*.cover' -type f -print0  | xargs --null -n 100 rm -vrf | wc -l
+
+bash delete.sh

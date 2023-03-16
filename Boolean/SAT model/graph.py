@@ -29,7 +29,7 @@ def draw(files, count):
     with open(files, "r") as file:
         cover = file.read()
         graph_data = ""
-
+       
         # finding pattern
         pattern = re.compile(r"--> (\d+)")
         for match in pattern.finditer(cover):

@@ -6,5 +6,17 @@ given lattice : function (total) (N, N) --> int(0..1)
 find C : function (total) (N,N) --> int(0..1)
 
 such that
+
+$Directed
 forAll i,j: N. (lattice((i,j)) = 1) <-> ((C((i,j)) = 1) \/ (C((j,i)) = 1)),
-forAll i,j: N. (C((i,j)) = 1) -> !(C((j,i)) = 1)
+forAll i,j: N. (C((i,j)) = 1) -> (C((j,i)) = 0),
+
+$Symmetry constraints
+forAll i:N. C((i,0)) = 0,
+forAll i,j: N. ((forAll k:N. (C((k,i)) = 0)) /\ (exists l:N. C((l,j)) = 1)) -> (i < j),
+
+$Non cyclic - this can be extended to cover other cuclic cases and could be implemented in python
+forAll i,j,k,l: N. ((lattice((i,j)) = 1) /\ (lattice((j,k)) = 1) /\ (lattice((k,l)) = 1) /\ (lattice((l,i)) = 1)) ->
+                   (!((C((i,j)) = 1) /\ (C((j,k)) = 1) /\ (C((k,l)) = 1) /\ (C((l,i)) = 1)) /\
+                   !((C((j,i)) = 1) /\ (C((k,j)) = 1) /\ (C((l,k)) = 1) /\ (C((i,l)) = 1))),
+       
