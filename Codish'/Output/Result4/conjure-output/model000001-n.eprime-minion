@@ -1,0 +1,25 @@
+MINION 3
+# CSETopLevel_number = 0
+# CSETopLevel_eliminated_expressions = 0
+# CSETopLevel_total_size = 0
+# CSE_active_number = 1
+# CSE_active_eliminated_expressions = 7
+# CSE_active_total_size = 3
+**VARIABLES**
+DISCRETE M_FunctionND_00001_00002 #
+{0..3}
+DISCRETE aux0 #Active-CSE: 7 occurrences of this expression or equivalent: (1 + M_FunctionND_00001_00002)
+{1..4}
+**SEARCH**
+PRINT[[M_FunctionND_00001_00002]]
+**CONSTRAINTS**
+watchelement_one([0, 1, 1, 2], aux0, 0)
+watchelement_one([0, 0, 0, 0], aux0, 0)
+watchelement_one([0, 1, M_FunctionND_00001_00002, 1], aux0, M_FunctionND_00001_00002)
+watchelement_one([0, M_FunctionND_00001_00002, 2, 2], aux0, M_FunctionND_00001_00002)
+watchelement_one([0, 1, 2, 3], aux0, M_FunctionND_00001_00002)
+watchelement_one([1, 1, 3, 3], aux0, 1)
+watchelement_one([2, 3, 2, 3], aux0, 2)
+sumleq([1,M_FunctionND_00001_00002],aux0)
+sumgeq([1,M_FunctionND_00001_00002],aux0)
+**EOF**

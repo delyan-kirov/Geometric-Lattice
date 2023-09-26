@@ -119,7 +119,7 @@ def make():
         for j in range(0,len(permutations[i])):
             permutations[i][j] = permutations[i][j] - 1
     
-
+    #print(permutations)
     constraints = sat_model(permutations, n) + "letting sizeS be " + str(len(permutations)-1)
     with open("n.param", 'a') as file:
       file.write(constraints)
