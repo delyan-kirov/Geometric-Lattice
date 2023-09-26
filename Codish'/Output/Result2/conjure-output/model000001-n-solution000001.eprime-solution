@@ -1,0 +1,18 @@
+language ESSENCE' 1.0
+
+letting C_FunctionND be [[0, 0; int(0..1)], [1, 0; int(0..1)]; int(0..1)]
+$ Visualisation for C_FunctionND
+$ 0 0
+$ 1 0
+
+letting J_FunctionND be [[0, 1; int(0..1)], [1, 1; int(0..1)]; int(0..1)]
+$ Visualisation for J_FunctionND
+$ 0 1
+$ 1 1
+
+letting M_FunctionND be [[0, 0; int(0..1)], [0, 1; int(0..1)]; int(0..1)]
+$ Visualisation for M_FunctionND
+$ 0 0
+$ 0 1
+
+letting R_Function1D be [0, 1; int(0..1)]

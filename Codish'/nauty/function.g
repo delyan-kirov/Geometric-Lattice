@@ -1,47 +1,33 @@
-DigraphsUseBliss();
+
 RemoveIsoImages := function(GraphList, GraphImage)
 local len, i, element;
 i := 0;
 len := Length(GraphList);
 for element in GraphList do
 i := i + 1;
-if IsIsomorphicDigraph(element, GraphImage) then
+if IsIsomorphicGraph(element, GraphImage) then
 Remove(GraphList, i);
 fi;
 od;
 return GraphList;
 end;
 
-RemoveCyclic := function(GraphList)
-local len, i, element;
-i := 0;
-len := Length(GraphList);
-for element in GraphList do
-i := i + 1;
-if IsAcyclicDigraph(element) then
-Remove(GraphList, i);
-fi;
-od;
-return GraphList;
-end;
+IsoFreeGraphs := [Lattices[1]];
 
-IsoFreeGraphs := [Graphs[1]];
-
-for element in Graphs do
-Graphs := RemoveIsoImages(Graphs, element);
-Add(IsoFreeGraphs, Graphs[1]);
+for element in Lattices do
+Lattices := RemoveIsoImages(Lattices, element);
+Add(IsoFreeGraphs, Lattices[1]);
 od;
 
-DAGs := RemoveCyclic(IsoFreeGraphs);
+GraphAutGps := [];
+GraphAutSize := [];
 
-DagAutGps := [];
-DagAutSize := [];
-for elements in DAGs do
-Add(DagAutGps, AutomorphismGroup(elements));
-Add(DagAutSize, Size(AutomorphismGroup(elements)));
+for elements in Lattices do
+Add(GraphAutGps, AutomorphismGroup(elements));
+Add(GraphAutSize, Size(AutomorphismGroup(elements)));
 od;
 
-Print(DagAutSize);
+Print(GraphAutSize);
 SaveWorkspace("workspace.g");
-PrintTo("result.g", Length(DAGs));
+PrintTo("result.g", Length(Lattices));
 quit;

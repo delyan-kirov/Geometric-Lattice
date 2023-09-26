@@ -5,7 +5,7 @@ import sys
 
 #%% Get file
 file = sys.argv[1]
-index = file.split("geo-n-")[1].split(".solution")[0]
+index = file.split("geo_sym-n-")[1].split(".solution")[0]
 print (index)
 content = ''
 with open(file, 'r') as file:
@@ -35,11 +35,24 @@ graphMatrix = []
 while cover != []:
     graphMatrix.append(cover[0:n])
     cover = cover[n:]
-# print(graphMatrix)
+print(graphMatrix)
+
+def adjacency_matrix_to_edges(adj_matrix):
+    edges = []
+    num_nodes = len(adj_matrix)
+
+    for i in range(0,num_nodes):
+        for j in range(0,num_nodes):
+            if adj_matrix[i][j] == 1: edges.append([i,j])
+
+    return edges
+
+result = adjacency_matrix_to_edges(graphMatrix)
+print (result)
 
 #%% Print result
 
-result = "G" + index + " := DigraphByAdjacencyMatrix(" + str(graphMatrix) + ");"
+result = "G" + index + " := " + 'GraphByEdges(' + str(result) + ");"
 
 with open("data.g", 'a') as f:
     f.write(result + "\n")
