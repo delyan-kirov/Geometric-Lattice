@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-rm -r Output
 mkdir Output
 
 for n in {2..14}
