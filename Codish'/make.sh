@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
+rm -r Output
 mkdir Output
 
 for n in {2..14}
 do
+  rm -r conjure-output 
   echo "letting n be "$n > n.param
   cat n.param
   python3 add_sym_constraints.py
@@ -15,5 +17,6 @@ do
   done 
   cp -r ./conjure-output ./Result$n
   mv ./Result$n ./Output
+  ./countSyms.sh $n
 done
 

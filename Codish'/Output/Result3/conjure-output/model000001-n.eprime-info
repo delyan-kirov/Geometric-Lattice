@@ -1,7 +1,7 @@
 SolverMemOut:0
 SATClauses:10
 SavileRowClauseOut:0
-SavileRowTotalTime:0.103
+SavileRowTotalTime:0.107
 SolverSatisfiable:0
 SavileRowTimeOut:0
 SolverTimeOut:0

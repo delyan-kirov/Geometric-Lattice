@@ -2,7 +2,7 @@ SolverTotalTime:0.00
 SolverMemOut:0
 SATClauses:0
 SavileRowClauseOut:0
-SavileRowTotalTime:1.01
+SavileRowTotalTime:0.946
 SolverSatisfiable:1
 SavileRowTimeOut:0
 SolverNodes:1
