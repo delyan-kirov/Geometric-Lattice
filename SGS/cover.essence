@@ -1,0 +1,11 @@
+language ESSENCE 2.4.0
+
+given J : function (total) (N,N) --> int
+
+find C : function (total) (N,N) --> int(0..1)
+
+such that 
+
+forAll i,j:N. ((C((i,j)) = 1) /\ ((J((i,j)) = i) /\ !(i = j) /\ !(exists k : N. !(i = k) /\ !(j = k) /\ (J((i, k)) = i) /\ (J((k,j)) = k)))) \/
+              (!(C((i,j)) = 1) /\ !((J((i,j)) = i) /\ !(i = j) /\ !(exists k : N. !(i = k) /\ !(j = k) /\ (J((i, k)) = i) /\ (J((k,j)) = k))))
+
