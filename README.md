@@ -4,7 +4,7 @@ SAT models for generating geometric lattices.
 
 ## Overview
 
-The folders SGS and Codish contain models for geometric lattices with different approaches for symmetry breaking. The folder BaseModel does not implemenet any symmetry breaking.
+The folders SGS and Codish contain models for geometric lattices with different approaches for symmetry breaking. The folder BaseModel does not implemenet any symmetry breaking. The file *SATGeoLattice.pdf* has more information about the model.
 
 ## Required Packages
 
