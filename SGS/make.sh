@@ -1,6 +1,10 @@
 #!/usr/bin/bash
+
+echo Removing cached files
 rm -r Output
 mkdir Output
+# Python environment
+source ../pythonEnv/bin/activate
 for n in {2..10}; do
     rm -r conjure-output
     echo
@@ -17,7 +21,7 @@ for n in {2..10}; do
 EOI
     python3 addGapConstraints.py
     # solving model
-    conjure solve -ac --number-of-solutions=all geo.essence n.param
+    conjure solve -ac --number-of-solutions=all --solver=nbc_minisat_all geo.essence n.param
     #Gather the data
     mkdir Result$n
     for file in *.solution

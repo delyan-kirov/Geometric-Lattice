@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+source ../pythonEnv/bin/activate
 mkdir Output
 
 for n in {2..14}
