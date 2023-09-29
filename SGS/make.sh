@@ -5,7 +5,7 @@ rm -r Output
 mkdir Output
 # Python environment
 source ../pythonEnv/bin/activate
-for n in {2..10}; do
+for n in {2..40}; do
     rm -r conjure-output
     echo
     echo "Setting n to $n"

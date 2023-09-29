@@ -3,7 +3,7 @@
 source ../pythonEnv/bin/activate
 mkdir Output
 
-for n in {2..14}
+for n in {2..40}
 do
   rm -r conjure-output 
   echo "letting n be "$n > n.param
